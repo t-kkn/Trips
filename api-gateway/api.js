@@ -1,33 +1,41 @@
+const express = require('express');
+const fs = require('fs/promises');
 
-const expressFn = require('express');
-const expressApp = expressFn();
-const fs = require('fs');
+const app = express();
 
-expressApp.get('/trips', function (req, res) {
-    fs.readFile('../json-server/db.json', (err, data) => {
-        if (err) throw err
-        let trip = JSON.parse(data)
-        res.send(trip)
-    });
+async function getTrips() {
+    const data = await fs.readFile('../json-server/db.json', 'utf8');
+    return JSON.parse(data);
+}
+
+// Get all trips
+app.get('/trips', async (req, res) => {
+    try {
+        const trips = await getTrips();
+        res.json(trips);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to load trips' });
+    }
 });
 
-expressApp.get('/api/trips', function (req, res) {
+// Search trips
+app.get('/api/trips', async (req, res) => {
+    try {
+        const keyword = (req.query.keyword || '').toLowerCase();
+        const data = await getTrips();
 
-    const keyword = req.query.keyword
+        const filteredTrips = data.trips.filter(item =>
+            item.title.toLowerCase().includes(keyword) ||
+            item.description.toLowerCase().includes(keyword) ||
+            item.tags.some(tag => tag.toLowerCase() === keyword)
+        );
 
-    fs.readFile('../json-server/db.json', (err, data) => {
-        if (err) throw err
-        let trip = JSON.parse(data)
-        let tripFilter = trip.trips.filter(function (item) {
-            return (item.title.indexOf(keyword) !== -1) ||
-                (item.description.indexOf(keyword) !== -1) ||
-                (item.tags.includes(keyword))
-        })
-        res.send(tripFilter)
-    });
+        res.json(filteredTrips);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to search trips' });
+    }
+});
 
-})
-
-expressApp.listen(9000, function () {
-    console.log('Listening on port 9000')
+app.listen(9000, () => {
+    console.log('Server running on port 9000');
 });
