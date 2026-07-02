@@ -1,46 +1,59 @@
 import React from 'react';
-import ReactReadMoreReadLess from 'react-read-more-read-less';
 
 function TripCard({ trip, onTagClick }) {
   return (
-    <div className="row mt-5">
+    <div className="card h-100 shadow-sm trip-card">
+      {trip.photos[0] && (
+        <img
+          src={trip.photos[0]}
+          alt={trip.title}
+          className="card-img-top"
+        />
+      )}
 
-      <div className="col-4 mt-2">
-        {trip.photos.slice(0, 1).map((photo, i) => (
-          <img key={i} src={photo} alt="" className="img-fluid rounded mx-auto d-block" />
+      <div className="card-body d-flex flex-column">
+        <h5 className="card-title">
+          <a href={trip.url} className="text-decoration-none text-dark">
+            {trip.title}
+          </a>
+        </h5>
+        <p className="card-text text-muted small flex-grow-1">
+          {trip.description.length > 120
+            ? trip.description.slice(0, 120) + '...'
+            : trip.description}
+        </p>
+        <a href={trip.url} className="btn btn-sm btn-primary mt-2 align-self-start">
+          อ่านต่อ →
+        </a>
+      </div>
+
+      {trip.photos.length > 1 && (
+        <div className="d-flex gap-1 px-3 pb-2">
+          {trip.photos.slice(1, 4).map((photo, i) => (
+            <img
+              key={i}
+              src={photo}
+              alt=""
+              className="rounded m-1"
+              style={{ width: '60px', height: '45px', objectFit: 'cover' }}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="card-footer bg-white border-top pt-2">
+        <span className="text-muted small me-1">หมวด:</span>
+        {trip.tags.map(tag => (
+          <button
+            key={tag}
+            value={tag}
+            onClick={event => onTagClick(event.target.value)}
+            className="btn btn-outline-primary btn-sm m-1"
+          >
+            {tag}
+          </button>
         ))}
       </div>
-
-      <div className="col-8">
-        <div className="row ml-3">
-          <h5><a href={trip.url}>{trip.title}</a></h5>
-        </div>
-        <div className="row ml-3">
-          <ReactReadMoreReadLess charLimit={75} readMoreText={""} readLessText={""}>
-            {trip.description}
-          </ReactReadMoreReadLess>
-          <a href={trip.url} className="ml-2">อ่านต่อ</a>
-        </div>
-        <div className="row ml-3 mt-1">
-          หมวด :
-          {trip.tags.map(tag => (
-            <button
-              key={tag}
-              value={tag}
-              onClick={event => onTagClick(event.target.value)}
-              className="btn btn-outline-primary btn-sm ml-1"
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-        <div className="row mt-3">
-          {trip.photos.slice(1, 4).map((photo, i) => (
-            <img key={i} src={photo} alt="" className="img-fluid rounded mx-auto d-block w-25" />
-          ))}
-        </div>
-      </div>
-
     </div>
   );
 }

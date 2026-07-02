@@ -1,10 +1,69 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
+
+* {
+  font-family: 'Prompt', sans-serif;
+}
 
 .App {
-  font-family: 'Prompt', sans-serif;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding-bottom: 3rem;
 }
+
+.hero-banner {
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  color: white;
+  text-align: center;
+  padding: 3.5rem 1rem 4rem;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.hero-banner h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.hero-banner p {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-bottom: 0;
+}
+
+.search-wrapper {
+  background: white;
+  border-radius: 0 0 1.5rem 1.5rem;
+  padding: 1.5rem 1rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.trip-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none !important;
+}
+
+.trip-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
+}
+
+.trip-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #6c757d;
+}
+
+.empty-state .empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+

@@ -11,12 +11,17 @@ function App() {
   const trips = useTrips(query);
 
   return (
-    <div className="App container">
-      <div className="col">
-        <div className="row justify-content-center">
-          <h1 className="text-primary">เที่ยวไหนดี</h1>
+    <div className="App">
+      <div className="hero-banner">
+        <h1>เที่ยวไหนดี</h1>
+        <p>ค้นหาสถานที่ท่องเที่ยวที่ใช่สำหรับคุณ</p>
+      </div>
+      <div className="search-wrapper">
+        <div className="container">
+          <SearchBar query={query} onQueryChange={setQuery} />
         </div>
-        <SearchBar query={query} onQueryChange={setQuery} />
+      </div>
+      <div className="container">
         <TripList trips={trips} onTagClick={setQuery} />
       </div>
     </div>
