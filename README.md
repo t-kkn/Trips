@@ -53,10 +53,10 @@ The app will be available at `http://localhost:3000`.
 ## Screenshots
 
 ### JSON Response
-![JSON Response](/web/public/screenshot1.jpg)
+![JSON Response](/frontend/public/screenshot1.jpg)
 
 ### Home Page
-![Home Page](/web/public/screenshot2.jpg)
+![Home Page](/frontend/public/screenshot2.jpg)
 
 ### Search
-![Search](/web/public/screenshot3.jpg)
+![Search](/frontend/public/screenshot3.jpg)
