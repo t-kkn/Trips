@@ -1,29 +1,62 @@
+# Trips
 
-# TRIPS
+A travel guide web application that lets users search and browse trip articles with descriptions, photos, and tags.
 
-```bash
-# go to api files
-$ cd api-gateway
+## Project Structure
 
-# serve reload at localhost:9000/trips
-$ node api.js
+```
+Trips/
+├── api-gateway/    # Express API server (port 9000)
+├── json-server/    # JSON data store (db.json)
+└── web/            # React frontend (port 3000)
 ```
 
-# JSON
-![image](/web/public/screenshot1.jpg)
+## Prerequisites
 
-# HOME PAGE
+- [Node.js](https://nodejs.org/) (v12+)
+- npm or yarn
+
+## Getting Started
+
+### 1. Start the API Gateway
 
 ```bash
-# go to web files
-$ cd web
-
-# client reload at localhost:3000/
-$ npm start
+cd api-gateway
+node api.js
 ```
 
-![image](/web/public/screenshot2.jpg)
+The API will be available at `http://localhost:9000`.
 
->_search_
+### 2. Start the Web App
 
-![image](/web/public/screenshot3.jpg)
+```bash
+cd web
+npm install
+npm start
+```
+
+The app will be available at `http://localhost:3000`.
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/trips` | Get all trips |
+| GET | `/api/trips?keyword=<term>` | Search trips by title, description, or tags |
+
+## Tech Stack
+
+- **Frontend:** React, Bootstrap, Axios
+- **Backend:** Node.js, Express
+- **Data:** JSON file (`db.json`)
+
+## Screenshots
+
+### JSON Response
+![JSON Response](/web/public/screenshot1.jpg)
+
+### Home Page
+![Home Page](/web/public/screenshot2.jpg)
+
+### Search
+![Search](/web/public/screenshot3.jpg)
