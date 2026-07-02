@@ -4,7 +4,7 @@ const fs = require('fs/promises');
 const app = express();
 
 async function getTrips() {
-    const data = await fs.readFile('../json-server/db.json', 'utf8');
+    const data = await fs.readFile('../data/db.json', 'utf8');
     return JSON.parse(data);
 }
 
